@@ -1,0 +1,14 @@
+# Target labels
+ vorbis-populate
+# Source files and their labels
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate-complete.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-build.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-configure.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-download.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-install.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-mkdir.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-patch.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-test.rule
+/Users/lorenzovaccarecci/Desktop/Università/Terzo Anno/Secondo Semestre/FCG/SFML/build/_deps/vorbis-subbuild/vorbis-populate-prefix/src/vorbis-populate-stamp/vorbis-populate-update.rule

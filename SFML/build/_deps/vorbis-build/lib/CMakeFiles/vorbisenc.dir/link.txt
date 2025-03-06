@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc ../../sfml-build/lib/libvorbisenc.a CMakeFiles/vorbisenc.dir/vorbisenc.c.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib ../../sfml-build/lib/libvorbisenc.a
