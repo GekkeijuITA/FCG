@@ -28,12 +28,9 @@ FetchContent_MakeAvailable(SFML)
 
 file(GLOB SRC_FILES "src/*.cpp")
 
-# Itera su ogni file sorgente e crea un eseguibile separato
 foreach(SRC_FILE ${SRC_FILES})
-    # Ottieni il nome del file senza estensione
     get_filename_component(EXECUTABLE_NAME ${SRC_FILE} NAME_WE)
 
-    # Aggiungi un eseguibile con lo stesso nome del file sorgente
     add_executable(${EXECUTABLE_NAME} ${SRC_FILE})
     target_compile_features(${EXECUTABLE_NAME} PRIVATE cxx_std_17)
     target_link_libraries(${EXECUTABLE_NAME} PRIVATE SFML::Graphics)
