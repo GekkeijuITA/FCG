@@ -8,7 +8,7 @@
 
 ////////////////////////////////////////////////////////////
 /// GUI State
-const int FONT_SIZE = 20;
+const int FONT_SIZE = 24;
 const int FONT_WIDTH = 14;
 const std::string FONT_NAME = "../resources/DejavuSansMono-5m7L.ttf";
 
@@ -65,19 +65,71 @@ void handle(const sf::Event::TextEntered &textEnter, State &gs)
     unsigned last = gs.log.size() - 1;
     // if (textEnter.unicode == 10 || textEnter.unicode == 13)
     if (textEnter.unicode == '\n' || textEnter.unicode == '\r') { // enter
-        gs.log.emplace_back("");
-        gs.cursor_pos = {0, gs.cursor_pos.y + 1};
+        std::string s1 = gs.log[gs.cursor_pos.y].substr(0, gs.cursor_pos.x);
+        std::string s2 = gs.log[gs.cursor_pos.y].substr(gs.cursor_pos.x);
+
+        gs.log[gs.cursor_pos.y] = s1;
+        gs.cursor_pos.y++;
+        gs.log.insert(gs.log.begin() + gs.cursor_pos.y, s2);
+
+        gs.cursor_pos = {0, gs.cursor_pos.y};
     }
     else if (textEnter.unicode >= ' ' && textEnter.unicode <= '~') { // printable char
-        gs.log[last] += static_cast<char>(textEnter.unicode);
+        gs.log[gs.cursor_pos.y].insert(gs.cursor_pos.x, 1, static_cast<char>(textEnter.unicode));
         gs.cursor_pos.x++;
+    }
+    else if (textEnter.unicode == '\b') {
+        if(gs.cursor_pos.x == 0) return;
+
+        if(gs.cursor_pos.x > 0) {
+            gs.log[gs.cursor_pos.y].erase(gs.cursor_pos.x - 1, 1);
+            gs.cursor_pos.x--;
+        }
+        else {
+            gs.cursor_pos.x = gs.log[gs.cursor_pos.y - 1].size();
+            gs.log[gs.cursor_pos.y - 1].append(gs.log[gs.cursor_pos.y]);
+            gs.log.erase(gs.log.begin() + gs.cursor_pos.y);
+            gs.cursor_pos.y--;
+        }
     }
     gs.adjustView();
 }
 
-// void handle(const sf::Event::KeyPressed &keyPressed, State &gs)
-// {
-// }
+void handle(const sf::Event::KeyPressed &keyPressed, State &gs)
+{
+    if(keyPressed.code == sf::Keyboard::Key::Right) {
+        if(gs.cursor_pos.x < gs.log[gs.cursor_pos.y].length()) {
+            gs.cursor_pos.x++;
+        } else if(gs.cursor_pos.y < gs.log.size() - 1) {
+            gs.cursor_pos = {0, gs.cursor_pos.y + 1};
+        }
+    } else if(keyPressed.code == sf::Keyboard::Key::Left) {
+        if(gs.cursor_pos.x > 0) {
+            gs.cursor_pos.x--;
+        } else if(gs.cursor_pos.y > 0) {
+            gs.cursor_pos = {
+                static_cast<int>(gs.log[gs.cursor_pos.y - 1].size()), 
+                gs.cursor_pos.y - 1
+            };
+        }
+    } else if(keyPressed.code == sf::Keyboard::Key::Up) {
+        if(gs.cursor_pos.y > 0) {
+            gs.cursor_pos = {
+                static_cast<int>(std::min((size_t)gs.cursor_pos.x, gs.log[gs.cursor_pos.y].size())), 
+                gs.cursor_pos.y - 1
+            };
+        }
+    } else if(keyPressed.code == sf::Keyboard::Key::Down) {
+        if(gs.cursor_pos.y < gs.log.size() - 1) {
+            gs.cursor_pos = {
+                static_cast<int>(std::min((size_t)gs.cursor_pos.x, gs.log[gs.cursor_pos.y].size())), 
+                gs.cursor_pos.y + 1
+            };
+        }
+    }
+
+    gs.adjustView();
+}
 
 // void handle(const sf::Event::MouseMoved &mouseMoved, State &gs)
 // {
@@ -123,15 +175,15 @@ void doGraphics(State &gs)
         }
     }
     // Show cursor
-    // ISSUE: il cursore man mano che si scrive va sempre più a destra
     logText.setString("_");
     logText.setFillColor(sf::Color::Green);
+    
     logText.setPosition({
-        static_cast<float>((gs.cursor_pos.x - gs.text_view.position.x + 1)) * FONT_WIDTH,
-        static_cast<float>((gs.cursor_pos.y - gs.text_view.position.y + 1)) * FONT_SIZE + 3
+        static_cast<float>(gs.cursor_pos.x - gs.text_view.position.x + 1) * FONT_WIDTH,
+        static_cast<float>(gs.cursor_pos.y - gs.text_view.position.y + 1) * FONT_SIZE + 3
     });
-    gs.window.draw(logText);
 
+    gs.window.draw(logText);
     gs.window.display();
 }
 
