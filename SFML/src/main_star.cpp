@@ -32,18 +32,16 @@ sf::ConvexShape star(float R, float r, int p) {
     sf::ConvexShape c(points);
 
     for(int i = 0; i < points; i++) {
-        float pos_x, pos_y;
+        float radius;
         int angle = i*2+5;
 
         if(i%2 == 0) {
-            pos_x = R * cos(angle * PI / points);
-            pos_y = R * sin(angle * PI / points);
+            radius = R;
         } else {
-            pos_x = r * cos(angle * PI / points);
-            pos_y = r * sin(angle * PI / points);
+            radius = r;
         }
 
-        c.setPoint(i,{pos_x, pos_y});
+        c.setPoint(i,{radius * cos(angle * PI / points), radius * sin(angle * PI / points)});
     }
     return c;
 }
@@ -69,7 +67,7 @@ int main()
         window.clear();
 
         float sqrt32 = sqrt(3.f) / 2.f;
-        sf::ConvexShape s = star(100.f, 40.f, 20);
+        sf::ConvexShape s = star(100.f, 40.f, 5);
         s.setFillColor(sf::Color::Green);
         s.rotate(sf::degrees(180));
         s.setScale({2.f, 2.f});
