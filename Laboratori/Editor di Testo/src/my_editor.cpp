@@ -79,7 +79,12 @@ void handle(const sf::Event::TextEntered &textEnter, State &gs)
         gs.cursor_pos.x++;
     }
     else if (textEnter.unicode == '\b') {
-        if(gs.cursor_pos.x == 0) return;
+        if(gs.cursor_pos.x == 0) {
+            if(gs.cursor_pos.y == 0) return;
+            
+            gs.cursor_pos.y--;
+            gs.cursor_pos.x = gs.log[gs.cursor_pos.y].size();
+        }
 
         if(gs.cursor_pos.x > 0) {
             gs.log[gs.cursor_pos.y].erase(gs.cursor_pos.x - 1, 1);
